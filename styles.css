@@ -93,8 +93,8 @@ button:disabled {
 }
 
 .field {
-  text-align:center;
-  width:25rem;
+  text-align:center; 
+  width:60%;
   height:3rem;
   font-size:2rem;
   border:2px solid #ccc;
@@ -136,4 +136,10 @@ button:disabled {
 
 .log--heal {
   color: green;
+}
+
+@media(max-width:450px){
+  .field {
+    font-size:1.5rem;
+  }
 }
