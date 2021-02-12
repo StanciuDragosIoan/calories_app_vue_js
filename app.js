@@ -13,9 +13,9 @@ const app = Vue.createApp({
                 }
             ],
             mealState: {
-                type: '',
-                quantity: 0,
-                caloriesPer100: 0
+                type: null,
+                quantity: null,
+                caloriesPer100: null
             },
             totalMeals: 0
         }
@@ -29,13 +29,22 @@ const app = Vue.createApp({
 
     methods: {
         grabMeal(e){
-            console.log("grab meal..");  
-            const qty = this.mealState.quantity;
-            const cals100 = this.mealState.caloriesPer100;
-            const type  = this.mealState.type;
-            const meal = this.calculateMealCalories(qty, cals100, type);
-            this.meals.push(meal);
-            this.totalMeals += meal.calories;
+            if(
+                this.mealState.quantity !== null 
+                        &&
+                this.mealState.caloriesPer100 !== null 
+                        &&
+                this.mealState.type !== null){
+                const qty = this.mealState.quantity;
+                const cals100 = this.mealState.caloriesPer100;
+                const type  = this.mealState.type;
+                const meal = this.calculateMealCalories(qty, cals100, type);
+                this.meals.push(meal);
+                this.totalMeals += meal.calories;
+            } else {
+                alert('Please input something..');
+            }
+           
             
         },
 

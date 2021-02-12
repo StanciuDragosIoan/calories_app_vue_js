@@ -62,8 +62,8 @@ section {
 
 button {
   font: inherit;
-  border: 1px solid #88005b;
-  background-color: #88005b;
+  border: 1px solid #350270;
+  background-color: #04035a;
   color: white;
   padding: 1rem 2rem;
   border-radius: 12px;
@@ -79,8 +79,8 @@ button:focus {
 
 button:hover,
 button:active {
-  background-color: #af0a78;
-  border-color: #af0a78;
+  background-color: #090cb6;
+  border-color: #190464; 
   box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.26);
 }
 
