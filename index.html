@@ -18,9 +18,9 @@
     </header>
     <div id="game">
       <section id="monster" class="container">
-        <input @change="grabType" class="field" placeholder="Food Type" type="text">
-        <input @change="grabQuantity"  class="field" placeholder="Food Quantity" type="text">
-        <input @change="grab100"  class="field" placeholder="Calories/100g" type="text">
+        <input v-model="mealState.type" @change="grabType" class="field" placeholder="Food Type" type="text">
+        <input v-model="mealState.quantity"  @change="grabQuantity"  class="field" placeholder="Food Quantity" type="text">
+        <input v-model="mealState.caloriesPer100"  @change="grab100"  class="field" placeholder="Calories/100g" type="text">
       </section>
       <section id="controls">
         <button @click="grabMeal">Add Meal</button>

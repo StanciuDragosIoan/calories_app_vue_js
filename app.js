@@ -41,6 +41,9 @@ const app = Vue.createApp({
                 const meal = this.calculateMealCalories(qty, cals100, type);
                 this.meals.push(meal);
                 this.totalMeals += meal.calories;
+                this.mealState.type= null; 
+                this.mealState.quantity= null; 
+                this.mealState.caloriesPer100= null; 
             } else {
                 alert('Please input something..');
             }
