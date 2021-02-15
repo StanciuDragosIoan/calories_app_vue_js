@@ -70,6 +70,10 @@ const app = Vue.createApp({
 
         grab100(e) {
             this.mealState.caloriesPer100 = e.target.value;
+        },
+
+        completeMeal() {
+            alert("meal complete..");
         }
     }
 });

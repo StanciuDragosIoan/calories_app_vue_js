@@ -19,11 +19,12 @@
     <div id="game">
       <section id="monster" class="container">
         <input v-model="mealState.type" @change="grabType" class="field" placeholder="Food Type" type="text">
-        <input v-model="mealState.quantity"  @change="grabQuantity"  class="field" placeholder="Food Quantity" type="text">
-        <input v-model="mealState.caloriesPer100"  @change="grab100"  class="field" placeholder="Calories/100g" type="text">
+        <input type="number" v-model="mealState.quantity"  @change="grabQuantity"  class="field" placeholder="Food Quantity" type="text">
+        <input type="number" v-model="mealState.caloriesPer100"  @change="grab100"  class="field" placeholder="Calories/100g" type="text">
       </section>
       <section id="controls">
-        <button @click="grabMeal">Add Meal</button>
+        <button @click="grabMeal">Add Food</button>
+        <button @click="completeMeal">Complete Meal</button>
       </section>
       <section v-if="meals.length>0" id="log" class="container">
         <h2>Meals</h2>
@@ -31,12 +32,14 @@
             class="meal-card" 
             v-for="meal in meals"
           >
-            <p>Meal: {{meal.food}}</p>
+            <p>Food: {{meal.food}}</p>
             <p>Meal Calories: {{meal.calories}}</p>
           </div>
           <h2 class="total">Total: {{totalMeals}}</h2>
           
       </section>
+ 
+
     </div>
   </body>
 </html>
