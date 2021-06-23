@@ -21,7 +21,6 @@ const app = Vue.createApp({
       totalProtein: 0,
       foodsList: [
         {
-          id: 1,
           name: "cartof",
           nutrition: {
             calsPer100G: 80,
@@ -30,7 +29,14 @@ const app = Vue.createApp({
         },
 
         {
-          id: 2,
+          name: "ceafa porc",
+          nutrition: {
+            calsPer100G: 250,
+            proteinPer100: 30,
+          },
+        },
+
+        {
           name: "paine casa",
           nutrition: {
             calsPer100G: 200,
@@ -39,32 +45,39 @@ const app = Vue.createApp({
         },
 
         {
-          id: 3,
-          name: "scoici",
+          name: "piept pui",
           nutrition: {
-            calsPer100G: 180,
-            proteinPer100: 25,
-          },
-        },
-
-        {
-          id: 4,
-          name: "ceafa",
-          nutrition: {
-            calsPer100G: 250,
+            calsPer100G: 165,
             proteinPer100: 30,
           },
         },
 
         {
-          id: 5,
           name: "protein icecream",
           nutrition: {
             calsPer100G: 270,
             proteinPer100: 30,
           },
         },
+
+        {
+          name: "pui",
+          nutrition: {
+            calsPer100G: 230,
+            proteinPer100: 30,
+          },
+        },
+
+        {
+          name: "scoici",
+          nutrition: {
+            calsPer100G: 180,
+            proteinPer100: 25,
+          },
+        },
       ],
+
+      showList: false,
     };
   },
 
@@ -135,8 +148,6 @@ const app = Vue.createApp({
       } else {
         totalCalories = (qty * cals100) / 100;
       }
-
-      // console.log(totalCalories)
       mealToAdd.food = type;
       mealToAdd.calories = totalCalories;
       mealToAdd.protein = totalProtein;
@@ -159,6 +170,10 @@ const app = Vue.createApp({
     clearMeals() {
       localStorage.clear();
       window.location.reload();
+    },
+
+    toggleList() {
+      this.showList = !this.showList;
     },
   },
 });

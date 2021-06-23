@@ -46,6 +46,8 @@
       <section id="controls">
         <button @click="grabMeal">Add Food</button>
         <button class="red" @click="clearMeals">Clear</button>
+
+        <button @click="toggleList">Toggle foods List</button>
       </section>
       <section v-if="meals.length>0" id="log" class="container">
         <h2>Meals</h2>
@@ -56,6 +58,14 @@
         </div>
         <h2 class="total">Total Calories: {{totalMeals}}</h2>
         <h3 class="total">Total Protein: {{totalProtein}}</h3>
+      </section>
+      <section v-if="showList" class="container">
+        <h2>Foods List</h2>
+        <div class="meal-card" v-for="food in foodsList">
+          <p>Food: {{ food.name }}</p>
+          <p>Calories/100g: {{ food.nutrition.calsPer100G }}</p>
+          <p>Protein/100g: {{ food.nutrition.proteinPer100 }}</p>
+        </div>
       </section>
     </div>
   </body>
