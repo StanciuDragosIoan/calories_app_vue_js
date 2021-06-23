@@ -1,45 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calorie App</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calorie App</title>
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://unpkg.com/vue@next" defer></script>
-  <script src="app.js" defer></script>
-</head>
-
-<body>
-  <header>
-    <h1>Calorie App</h1>
-  </header>
-  <div id="game">
-    <section id="monster" class="container">
-      <input v-model="mealState.type" @change="grabType" class="field" placeholder="Food Type" type="text">
-      <input type="number" v-model="mealState.quantity" @change="grabQuantity" class="field" placeholder="Food Quantity"
-        type="text">
-      <input type="number" v-model="mealState.caloriesPer100" @change="grab100" class="field"
-        placeholder="Calories/100g" type="text">
-    </section>
-    <section id="controls">
-      <button @click="grabMeal">Add Food</button>
-      <button @click="completeMeal">Complete Meal</button>
-    </section>
-    <section v-if="meals.length>0" id="log" class="container">
-      <h2>Meals</h2>
-      <div class="meal-card" v-for="meal in meals">
-        <p>Food: {{meal.food}}</p>
-        <p>Meal Calories: {{meal.calories}}</p>
-        <p>Meal Protein: {{meal.protein}}</p>
-      </div>
-      <h2 class="total">Total Calories: {{totalMeals}}</h2>
-      <h3 class="total">Total Protein: {{totalProtein}}</h3>
-    </section>
-
-
-  </div>
-</body>
-
+  <body>
+    <header>
+      <h1>Calorie App</h1>
+    </header>
+    <div id="game">
+      <section id="monster" class="container">
+        <input
+          v-model="mealState.type"
+          @change="grabType"
+          class="field"
+          placeholder="Food Type"
+          type="text"
+        />
+        <input
+          type="number"
+          v-model="mealState.quantity"
+          @change="grabQuantity"
+          class="field"
+          placeholder="Food Quantity"
+          type="text"
+        />
+        <input
+          type="number"
+          v-model="mealState.caloriesPer100"
+          @change="grab100"
+          class="field"
+          placeholder="Calories/100g"
+          type="text"
+        />
+      </section>
+      <section id="controls">
+        <button @click="grabMeal">Add Food</button>
+        <button class="red" @click="clearMeals">Clear</button>
+      </section>
+      <section v-if="meals.length>0" id="log" class="container">
+        <h2>Meals</h2>
+        <div class="meal-card" v-for="meal in meals">
+          <p>Food: {{meal.food}}</p>
+          <p>Meal Calories: {{meal.calories}}</p>
+          <p>Meal Protein: {{meal.protein}}</p>
+        </div>
+        <h2 class="total">Total Calories: {{totalMeals}}</h2>
+        <h3 class="total">Total Protein: {{totalProtein}}</h3>
+      </section>
+    </div>
+  </body>
 </html>

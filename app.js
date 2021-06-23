@@ -55,6 +55,15 @@ const app = Vue.createApp({
             proteinPer100: 30,
           },
         },
+
+        {
+          id: 5,
+          name: "protein icecream",
+          nutrition: {
+            calsPer100G: 270,
+            proteinPer100: 30,
+          },
+        },
       ],
     };
   },
@@ -65,6 +74,17 @@ const app = Vue.createApp({
     },
   },
 
+  mounted() {
+    const tempMeals = JSON.parse(localStorage.getItem("totalMeals"));
+    const tempCals = JSON.parse(localStorage.getItem("totalCals"));
+    const tempProtein = JSON.parse(localStorage.getItem("totalProtein"));
+
+    if (tempMeals && tempCals && tempProtein) {
+      tempMeals.forEach((i) => this.meals.push(i));
+      this.totalMeals = tempCals;
+      this.totalProtein = tempProtein;
+    }
+  },
   methods: {
     grabMeal(e) {
       if (
@@ -82,6 +102,9 @@ const app = Vue.createApp({
         this.mealState.type = null;
         this.mealState.quantity = null;
         this.mealState.caloriesPer100 = null;
+        localStorage.setItem("totalMeals", JSON.stringify(this.meals));
+        localStorage.setItem("totalCals", JSON.stringify(this.totalMeals));
+        localStorage.setItem("totalProtein", JSON.stringify(this.totalProtein));
       } else {
         alert("Please input something..");
       }
@@ -133,8 +156,9 @@ const app = Vue.createApp({
       this.mealState.caloriesPer100 = e.target.value;
     },
 
-    completeMeal() {
-      alert("meal complete..");
+    clearMeals() {
+      localStorage.clear();
+      window.location.reload();
     },
   },
 });
