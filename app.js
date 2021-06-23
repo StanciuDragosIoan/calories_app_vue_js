@@ -17,7 +17,41 @@ const app = Vue.createApp({
                 quantity: null,
                 caloriesPer100: null
             },
-            totalMeals: 0
+            totalMeals: 0,
+            totalProtein: 0,
+            foodsList: [
+                {
+                    id: 1,
+                    name: "cartof",
+                    nutrition:{
+                        calsPer100G: 80,
+                        proteinPer100: 3,
+                    }
+                   
+                },
+
+                {
+                    id: 2,
+                    name: "paine casa",
+                    nutrition:{
+                        calsPer100G: 200,
+                        proteinPer100: 10,
+                    }
+                   
+                },
+
+                {
+                    id: 3,
+                    name: "scoici",
+                    nutrition:{
+                        calsPer100G: 180,
+                        proteinPer100: 25,
+                    }
+                   
+                },
+
+               
+            ]
         }
     },
 
@@ -41,6 +75,7 @@ const app = Vue.createApp({
                 const meal = this.calculateMealCalories(qty, cals100, type);
                 this.meals.push(meal);
                 this.totalMeals += meal.calories;
+                this.totalProtein += meal.protein;
                 this.mealState.type= null; 
                 this.mealState.quantity= null; 
                 this.mealState.caloriesPer100= null; 
@@ -51,12 +86,37 @@ const app = Vue.createApp({
             
         },
 
+        checkMeal(input){
+            const filtereInput = input.toLowerCase();
+            const filterAr = this.foodsList.map(i => i.name);
+            console.log(filterAr);
+            if(filterAr.includes(filtereInput)){
+                const output = this.foodsList.filter(i => i.name === filtereInput);
+                const objToReturn = {...output[0].nutrition};
+                return objToReturn;
+            } else {
+                return null;
+            }
+        },
+
         calculateMealCalories (qty, cals100, type) {
-            console.log("calculating here..");
+            const nutritionItem = this.checkMeal(type);
             const mealToAdd = {};
-            const totalCalories = (qty * cals100) / 100;
+            let totalCalories;
+            let totalProtein = 0;
+            if(nutritionItem !== null) {  
+                console.log(nutritionItem);
+                totalCalories = (qty * nutritionItem.calsPer100G) / 100;
+                totalProtein = (qty * nutritionItem.proteinPer100) / 100;;
+            } else { 
+                totalCalories = (qty * cals100) / 100;
+            }
+            
+            // console.log(totalCalories)
             mealToAdd.food = type;
             mealToAdd.calories = totalCalories;
+            mealToAdd.protein = totalProtein;
+            console.log(mealToAdd);
             return mealToAdd;
         },
 
