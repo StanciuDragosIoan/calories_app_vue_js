@@ -16,6 +16,7 @@ const app = Vue.createApp({
         type: null,
         quantity: null,
         caloriesPer100: null,
+        proteinIn100: null,
       },
       totalMeals: 0,
       totalProtein: 0,
@@ -103,18 +104,21 @@ const app = Vue.createApp({
       if (
         this.mealState.quantity !== null &&
         this.mealState.caloriesPer100 !== null &&
+        this.mealState.type !== null &&
         this.mealState.type !== null
       ) {
         const qty = this.mealState.quantity;
         const cals100 = this.mealState.caloriesPer100;
         const type = this.mealState.type;
-        const meal = this.calculateMealCalories(qty, cals100, type);
+        const protein = this.mealState.proteinIn100;
+        const meal = this.calculateMealCalories(qty, cals100, protein, type);
         this.meals.push(meal);
         this.totalMeals += meal.calories;
         this.totalProtein += meal.protein;
         this.mealState.type = null;
         this.mealState.quantity = null;
         this.mealState.caloriesPer100 = null;
+        this.mealState.proteinIn100 = null;
         localStorage.setItem("totalMeals", JSON.stringify(this.meals));
         localStorage.setItem("totalCals", JSON.stringify(this.totalMeals));
         localStorage.setItem("totalProtein", JSON.stringify(this.totalProtein));
@@ -126,7 +130,7 @@ const app = Vue.createApp({
     checkMeal(input) {
       const filtereInput = input.toLowerCase();
       const filterAr = this.foodsList.map((i) => i.name);
-      console.log(filterAr);
+      // console.log(filterAr);
       if (filterAr.includes(filtereInput)) {
         const output = this.foodsList.filter((i) => i.name === filtereInput);
         const objToReturn = { ...output[0].nutrition };
@@ -136,22 +140,24 @@ const app = Vue.createApp({
       }
     },
 
-    calculateMealCalories(qty, cals100, type) {
+    calculateMealCalories(qty, cals100, protein, type) {
       const nutritionItem = this.checkMeal(type);
       const mealToAdd = {};
       let totalCalories;
       let totalProtein = 0;
       if (nutritionItem !== null) {
-        console.log(nutritionItem);
+        // console.log(nutritionItem);
         totalCalories = (qty * nutritionItem.calsPer100G) / 100;
         totalProtein = (qty * nutritionItem.proteinPer100) / 100;
       } else {
         totalCalories = (qty * cals100) / 100;
+        totalProtein = (qty * protein) / 100;
+        // console.log(totalProtein);
       }
       mealToAdd.food = type;
       mealToAdd.calories = totalCalories;
       mealToAdd.protein = totalProtein;
-      console.log(mealToAdd);
+      // console.log(mealToAdd);
       return mealToAdd;
     },
 
@@ -165,6 +171,10 @@ const app = Vue.createApp({
 
     grab100(e) {
       this.mealState.caloriesPer100 = e.target.value;
+    },
+
+    grabProtein(e){
+      this.mealState.proteinIn100 = e.target.value;
     },
 
     clearMeals() {
