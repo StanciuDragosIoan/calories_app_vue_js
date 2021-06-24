@@ -15,7 +15,7 @@
   <header>
     <h1>Calorie App</h1>
   </header>
-  <div id="game">
+  <div id="tracker">
     <section id="monster" class="container">
       <input v-model="mealState.type" @change="grabType" class="field" placeholder="Food Type" type="text" />
       <input type="number" v-model="mealState.quantity" @change="grabQuantity" class="field" placeholder="Food Quantity"
@@ -33,10 +33,11 @@
     </section>
     <section v-if="meals.length>0" id="log" class="container">
       <h2>Meals</h2>
-      <div class="meal-card" v-for="meal in meals">
+      <div class="meal-card" v-for="(meal, index) in meals">
         <p>Food: {{meal.food}}</p>
         <p>Meal Calories: {{meal.calories}}</p>
         <p>Meal Protein: {{meal.protein}}</p>
+        <i class="delete" @click="deleteItem(index)">X</i>
       </div>
       <h2 class="total">Total Calories: {{totalMeals}}</h2>
       <h3 class="total">Total Protein: {{totalProtein}}</h3>

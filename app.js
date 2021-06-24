@@ -130,7 +130,6 @@ const app = Vue.createApp({
     checkMeal(input) {
       const filtereInput = input.toLowerCase();
       const filterAr = this.foodsList.map((i) => i.name);
-      // console.log(filterAr);
       if (filterAr.includes(filtereInput)) {
         const output = this.foodsList.filter((i) => i.name === filtereInput);
         const objToReturn = { ...output[0].nutrition };
@@ -153,7 +152,7 @@ const app = Vue.createApp({
         totalCalories = (qty * cals100) / 100;
         totalProtein = (qty * protein) / 100;
         // console.log(totalProtein);
-      }
+      } 
       mealToAdd.food = type;
       mealToAdd.calories = totalCalories;
       mealToAdd.protein = totalProtein;
@@ -185,7 +184,20 @@ const app = Vue.createApp({
     toggleList() {
       this.showList = !this.showList;
     },
+
+    deleteItem(idx) {
+   
+      const mealToDelete = this.meals.filter((i, index) => index === idx);
+       
+      this.meals.splice(idx, 1);
+      this.totalMeals -= mealToDelete[0].calories;
+      this.totalProtein -= mealToDelete[0].protein;
+ 
+      localStorage.setItem("totalMeals", JSON.stringify(this.meals));
+      localStorage.setItem("totalCals", JSON.stringify(this.totalMeals));
+      localStorage.setItem("totalProtein", JSON.stringify(this.totalProtein));     
+    }
   },
 });
 
-app.mount("#game");
+app.mount("#tracker");
