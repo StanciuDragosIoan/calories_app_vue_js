@@ -38,6 +38,15 @@ const app = Vue.createApp({
         },
 
         {
+          name: "egg",
+          nutrition: {
+            calsPer100G: 150,
+            proteinPer100: 12,
+            fatPer100: 10,
+          },
+        },
+
+        {
           name: "paine casa",
           nutrition: {
             calsPer100G: 200,
@@ -76,6 +85,8 @@ const app = Vue.createApp({
             proteinPer100: 25,
           },
         },
+
+        
       ],
 
       showList: false,
