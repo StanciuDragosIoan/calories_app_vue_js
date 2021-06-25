@@ -45,7 +45,7 @@
 
     <section v-if="showList" class="container">
       <h2>Foods List</h2>
-      <input class="search field" type="text" @input="filterMeals($event)">
+      <input placeholder="Search &#128523;" class="search field" type="text" @input="filterMeals($event)">
       <div class="meal-card" v-for="food in foodsList">
         <p>{{ food.name }}</p>
         <p>Calories/100g: {{ food.nutrition.calsPer100G }}</p>
