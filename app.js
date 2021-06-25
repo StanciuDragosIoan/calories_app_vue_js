@@ -38,7 +38,7 @@ const app = Vue.createApp({
         },
 
         {
-          name: "egg",
+          name: "ou",
           nutrition: {
             calsPer100G: 150,
             proteinPer100: 12,
@@ -194,6 +194,26 @@ const app = Vue.createApp({
 
     toggleList() {
       this.showList = !this.showList;
+    },
+
+    filterMeals(e){ 
+      console.log(e.target.value);
+      document.querySelectorAll(".meal-card").forEach((item) => {
+        let value = document.querySelector(".search")
+                                .value.toLowerCase();
+        
+                                console.log(value);
+        const meal = item.children[0].innerText;
+        console.log(meal);
+        if (
+          meal.toLowerCase().indexOf(value) != -1 
+        ) {
+          item.style.display = "block";
+        } else {
+          item.style.display = "none";
+        }        
+   
+      });
     },
 
     deleteItem(idx) {

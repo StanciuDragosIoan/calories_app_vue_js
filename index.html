@@ -42,10 +42,12 @@
       <h2 class="total">Total Calories: {{totalMeals.toFixed(2)}}</h2>
       <h3 class="total">Total Protein: {{totalProtein.toFixed(2)}}</h3>
     </section>
+
     <section v-if="showList" class="container">
       <h2>Foods List</h2>
+      <input class="search field" type="text" @input="filterMeals($event)">
       <div class="meal-card" v-for="food in foodsList">
-        <p>Food: {{ food.name }}</p>
+        <p>{{ food.name }}</p>
         <p>Calories/100g: {{ food.nutrition.calsPer100G }}</p>
         <p>Protein/100g: {{ food.nutrition.proteinPer100 }}</p>
       </div>
