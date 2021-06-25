@@ -39,8 +39,8 @@
         <p>Meal Protein: {{meal.protein}}</p>
         <i class="delete" @click="deleteItem(index)">X</i>
       </div>
-      <h2 class="total">Total Calories: {{totalMeals}}</h2>
-      <h3 class="total">Total Protein: {{totalProtein}}</h3>
+      <h2 class="total">Total Calories: {{totalMeals.toFixed(2)}}</h2>
+      <h3 class="total">Total Protein: {{totalProtein.toFixed(2)}}</h3>
     </section>
     <section v-if="showList" class="container">
       <h2>Foods List</h2>
